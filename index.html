@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Circle Outsourcing Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Afacad+Flux:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#15A4A7;
+    --teal-dark:#005E60;
+    --orange:#EF5713;
+    --orange-light:#FA7D46;
+    --navy:#0F1923;
+    --grey-bg:#F5F5F5;
+    --text-dark:#3F3333;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Poppins',sans-serif; color:var(--text-dark);}
+  img{max-width:100%; display:block;}
+  .row12{max-width:1440px; margin:0 auto; padding:0 78.4px;} /* 0.8 of a 98px column (12-col grid, 1440 width, 24px gap) */
+  .col-content{width:100%;}
+  a{color:inherit; text-decoration:none;}
+
+  /* ===== NAV ===== */
+  header{position:fixed; top:0; left:0; right:0; z-index:50; background:rgba(15,25,35,0); transition:background-color .35s ease, box-shadow .35s ease;}
+  header.scrolled{background:rgba(15,25,35,0.97); box-shadow:0 4px 20px rgba(0,0,0,.25);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:24px 0;}
+  .brand{display:flex; align-items:center; gap:14px;}
+  .brand img{width:60px; height:55px; border-radius:8px; box-shadow:0 4px 4px rgba(0,0,0,.25);}
+  .brand-text{color:#fff;}
+  .brand-text .name{font-size:22px; font-weight:600; line-height:1.2;}
+  .brand-text .sub{font-size:17px; font-weight:300;}
+  nav.links{display:flex; gap:36px; flex-wrap:wrap;}
+  nav.links a{color:#fff; font-size:18px; font-weight:500;}
+  .btn{display:inline-block; border-radius:50px; padding:13px 28px; font-size:18px; font-weight:500; white-space:nowrap;}
+  .btn-orange{background:var(--orange); color:#fff;}
+  .btn-outline{border:1px solid #fff; color:#fff; background:rgba(0,0,0,.15);}
+  .btn-teal-outline{border:2px solid var(--teal); color:var(--teal); background:transparent;}
+  .btn-teal{background:var(--teal); color:#fff; border:2px solid var(--teal);}
+  .btn-white{background:#fff; color:var(--orange-light);}
+
+  /* ===== HERO ===== */
+  .hero{position:relative; background:var(--navy); overflow:hidden; min-height:780px; display:flex; align-items:center;}
+  .hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.55; z-index:0;}
+  .hero .row12{position:relative; z-index:1; width:100%;}
+  .hero-content{display:flex; flex-direction:column; align-items:center; text-align:center;}
+  .hero-content h1{color:#fff; font-size:64px; font-weight:700; text-shadow:0 4px 4px rgba(0,0,0,.25); line-height:1.15; max-width:900px;}
+  .hero-content p{color:#fff; font-size:18px; font-weight:500; margin-top:18px; text-shadow:0 4px 4px rgba(0,0,0,.25);}
+  .hero-ctas{display:flex; gap:18px; margin-top:28px;}
+
+  /* ===== STATS BAR ===== */
+  .stats{background:var(--teal); display:flex; flex-wrap:wrap; justify-content:center; gap:60px; padding:36px 0;}
+  .stat{text-align:center; color:#fff; max-width:210px;}
+  .stat .num{font-size:32px; font-weight:600; text-shadow:0 4px 4px rgba(0,0,0,.25);}
+  .stat .label{font-size:15px; font-weight:400; margin-top:6px; white-space:nowrap;}
+
+  /* ===== TRUSTED BY ===== */
+  .trusted{background:var(--grey-bg); padding:48px 24px; text-align:center;}
+  .trusted .eyebrow{color:rgba(63,51,51,.65); font-size:14px; font-weight:400; letter-spacing:.5px; margin-bottom:28px;}
+  .trusted-logos{display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:64px; opacity:.45; color:var(--text-dark);}
+  .trusted-logos .logo{font-size:26px; font-weight:600; display:flex; align-items:center; gap:8px; letter-spacing:.5px;}
+  .trusted-logos svg{width:24px; height:24px;}
+
+  /* ===== SECTION GENERIC ===== */
+  section{padding:90px 0;}
+  .eyebrow{color:var(--orange); font-size:14px; font-weight:500; letter-spacing:.5px; margin-bottom:10px;}
+  h2{font-size:36px; font-weight:600; line-height:1.4;}
+  h2 .teal{color:var(--teal);}
+  .center{text-align:center;}
+
+  /* ===== WHY CHOOSE US ===== */
+  .why{background:#fff;}
+  .why-grid{display:flex; gap:64px; align-items:center; flex-wrap:wrap;}
+  .why-text{flex:1 1 480px; min-width:280px;}
+  .why-text p.lead{font-size:20px; font-weight:300; text-align:justify; margin:24px 0 32px; line-height:1.5;}
+  .why-list{list-style:none; display:flex; flex-direction:column; gap:24px;}
+  .why-list li{display:flex; gap:16px; align-items:flex-start; font-size:19px; font-weight:300;}
+  .why-list .bullet{flex:0 0 19px; height:19px; width:19px; background:var(--teal); margin-top:3px; border-radius:3px;}
+  .learn-more{display:inline-block; margin-top:32px; color:var(--teal); font-size:14px; font-weight:500;}
+  .why-img{flex:1 1 420px; min-width:280px; position:relative;}
+  .why-img img{border-radius:20px; width:100%; height:auto;}
+  .accent-block{position:absolute; border-radius:10px;}
+  .accent-teal{width:64px; height:64px; background:var(--teal); top:-20px; right:20px; display:flex; align-items:center; justify-content:center;}
+  .accent-orange{width:95px; height:72px; background:var(--orange); bottom:-30px; left:-40px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff;}
+  .accent-orange .pct{font-size:24px; font-weight:600; text-shadow:0 4px 4px rgba(0,0,0,.25);}
+  .accent-orange .pct-label{font-size:8px; font-weight:500; margin-top:4px;}
+
+  /* ===== SERVICES ===== */
+  .services{background:var(--grey-bg);}
+  .services-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:48px;}
+  .service-card{background:#fff; border-radius:20px; border:1px solid rgba(0,0,0,.13); box-shadow:0 4px 4px rgba(0,0,0,.25); padding:32px 24px; text-align:center; display:flex; flex-direction:column; align-items:center;}
+  .service-icon{width:80px; height:80px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:24px;}
+  .service-icon.teal{background:var(--teal);}
+  .service-icon.orange{background:var(--orange);}
+  .service-icon svg{width:38px; height:38px; stroke:#fff; fill:none; stroke-width:2;}
+  .service-card h3{font-size:18px; font-weight:600; margin-bottom:14px;}
+  .service-card p{font-size:14px; font-weight:300; line-height:1.5;}
+  .services-cta{text-align:center; margin-top:48px;}
+
+ /* ===== CULTURE ===== */
+  .culture-grid{display:flex; gap:64px; align-items:center; flex-wrap:wrap;}
+  .culture-img{flex:1 1 380px; min-width:280px; display:flex; gap:14px; align-items:stretch;}
+  .culture-img img{border-radius:18px; width:100%; height:260px; object-fit:cover; display:block;}
+  .culture-img img:first-child{flex:0 1 42%;}
+  .culture-img img:last-child{flex:0 1 58%;}
+  .culture-text{flex:1 1 460px; min-width:280px;}
+  .culture-text p.lead{font-size:20px; font-weight:300; text-align:justify; margin:24px 0 32px; line-height:1.5;}
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials{background:var(--grey-bg);}
+  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:48px;}
+  .testi-card{background:rgba(255,255,255,.29); border:2px solid #CECECE; border-radius:20px; padding:28px; display:flex; flex-direction:column; gap:24px;}
+  .testi-card .quote{font-size:13px; font-weight:300; line-height:1.6; flex:1;}
+  .testi-divider{border-top:1px solid #CECECE;}
+  .testi-person{display:flex; align-items:center; gap:14px;}
+  .avatar{width:46px; height:42px; border-radius:50%; background:rgba(21,164,167,.51); display:flex; align-items:center; justify-content:center; color:var(--teal-dark); font-size:20px; font-weight:600;}
+  .testi-person .name{font-size:14px; font-weight:500;}
+  .testi-person .role{font-size:12px; font-weight:300;}
+  .stars{color:#F5A623; font-size:14px; letter-spacing:2px;}
+
+  /* ===== CTA ===== */
+  .cta-wrap{padding:40px 24px 0; position:relative; z-index:2; margin-bottom:-140px;}
+  .cta{background:var(--orange-light); border-radius:20px; padding:64px 48px; text-align:center; position:relative; overflow:hidden;}
+  .cta img.deco{display:none;}
+  .cta .ring{position:absolute; right:-40px; bottom:-60px; width:280px; height:280px; border:14px solid rgba(255,255,255,.18); border-radius:50%;}
+  .cta .ring::before{content:''; position:absolute; inset:35px; border:14px solid rgba(255,255,255,.18); border-radius:50%;}
+  .cta .ring::after{content:''; position:absolute; inset:70px; border:14px solid rgba(255,255,255,.18); border-radius:50%;}
+  .cta h2{color:#fff; font-size:48px; font-weight:700; text-shadow:0 4px 4px rgba(0,0,0,.25); position:relative; z-index:1;}
+  .cta p{color:#fff; font-size:22px; font-weight:400; font-family:'Afacad Flux',sans-serif; margin:20px auto 32px; max-width:700px; position:relative; z-index:1;}
+  .cta .btn{position:relative; z-index:1;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--navy); color:#fff; padding:200px 24px 32px; position:relative; z-index:1;}
+  .footer-grid{display:flex; gap:48px; flex-wrap:wrap;}
+  .footer-col{flex:1 1 260px; min-width:220px;}
+  .footer-brand{display:flex; gap:14px; align-items:center; margin-bottom:18px;}
+  .footer-brand img{width:60px; height:55px; border-radius:8px; box-shadow:0 4px 4px rgba(0,0,0,.25);}
+  .footer-brand .name{font-size:22px; font-weight:600;}
+  .footer-brand .sub{font-size:17px; font-weight:300;}
+  .footer-col p{font-size:15px; font-weight:400; line-height:1.5;}
+  .footer-col h4{font-size:22px; font-weight:600; margin-bottom:20px;}
+  .footer-links{list-style:none; display:flex; flex-direction:column; gap:14px;}
+  .footer-links a{font-size:16px; font-weight:400;}
+  .contact-row{display:flex; gap:12px; margin-bottom:18px; font-size:15px; font-weight:400; line-height:1.5;}
+  .icon-circle{width:18px; height:18px; border:1px solid #fff; border-radius:3px; flex:0 0 18px; margin-top:2px;}
+  .socials{display:flex; gap:14px; margin-top:24px;}
+  .social{width:46px; height:45px; border-radius:50%; background:rgba(255,255,255,.24); display:flex; align-items:center; justify-content:center;}
+  .social svg{width:18px; height:18px; stroke:#fff; fill:none; stroke-width:1.5;}
+  .footer-bottom{border-top:1px solid #fff; margin-top:48px; padding-top:24px; text-align:center; font-size:14px; font-weight:400;}
+
+  @media (max-width:900px){
+    .nav{flex-direction:column; gap:18px; padding:24px;}
+    nav.links{justify-content:center;}
+    .why-grid, .culture-grid{flex-direction:column;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .testi-grid{grid-template-columns:1fr;}
+    .hero-content h1{font-size:40px;}
+    .cta h2{font-size:32px;}
+  }
+  @media (max-width:560px){
+    .services-grid{grid-template-columns:1fr;}
+    .stats{gap:30px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="row12"><div class="col-content nav">
+    <div class="brand">
+      <img src="COS LOGO.png" alt="logo">
+      <div class="brand-text">
+        <div class="name">Circle Outsourcing</div>
+        <div class="sub">Solutions</div>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Careers</a>
+      <a href="#">Why It Works</a>
+      <a href="#">Contact</a>
+    </nav>
+    <a href="#" class="btn btn-orange">Let's Talk</a>
+  </div></div>
+</header>
+
+<section class="hero" style="padding:0;">
+  <img class="hero-bg" src="HERO SECTION.png" alt="hero background">
+  <div class="row12"><div class="col-content hero-content">
+    <h1>Where Service Comes Full Circle</h1>
+    <p>Connecting Top-Tier Talent with Leading Companies</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-orange">Get Started</a>
+      <a href="#" class="btn btn-outline">Learn More</a>
+    </div>
+  </div></div>
+</section>
+
+<div class="stats">
+  <div class="row12"><div class="col-content" style="display:flex; flex-wrap:wrap; justify-content:center; gap:60px;">
+  <div class="stat"><div class="num">200</div><div class="label">Employees scaled for a single client</div></div>
+  <div class="stat"><div class="num">20+</div><div class="label">Years combined expertise</div></div>
+  <div class="stat"><div class="num">3</div><div class="label">Companies built from scratch</div></div>
+  <div class="stat"><div class="num">10+</div><div class="label">Roles and services offered</div></div>
+  </div></div>
+</div>
+
+<div class="trusted">
+  <div class="eyebrow">TRUSTED BY LEADING COMPANIES</div>
+  <div class="row12"><div class="col-content trusted-logos">
+    <div class="logo">Spotify</div>
+    <div class="logo">Google</div>
+    <div class="logo">GitHub</div>
+    <div class="logo" style="font-size:24px; letter-spacing:2px;">SONY</div>
+  </div>
+</div>
+</div>
+
+<section class="why">
+  <div class="row12"><div class="col-content why-grid">
+    <div class="why-text">
+      <div class="eyebrow">WHY CHOOSE US</div>
+      <h2>Your Success is our <span class="teal">Business</span></h2>
+      <p class="lead">At Circle Outsourcing Solutions, we provide customized outsourcing services designed to support your business goals and drive long-term success. We focus on building strong partnerships and delivering solutions that create real value.</p>
+      <ul class="why-list">
+        <li><span class="bullet"></span>Tailored solutions that fit your business needs and goals.</li>
+        <li><span class="bullet"></span>Experienced Professionals with strong industry knowledge and skills.</li>
+        <li><span class="bullet"></span>Reliable Partnership committed to consistent support and lasting success.</li>
+      </ul>
+      <a href="#" class="learn-more">Learn more about us &gt;</a>
+    </div>
+    <div class="why-img">
+      <img src="WEBSITE PICS/3 People.png" alt="team">
+      <div class="accent-block accent-teal">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5L7 21l5-3 5 3-1.5-8.5"/></svg>
+      </div>
+      <div class="accent-block accent-orange">
+        <div class="pct">98%</div>
+        <div class="pct-label">Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="services">
+  <div class="eyebrow center">WHAT WE DO</div>
+  <h2 class="center">Services Built for <span class="teal">Real Results</span></h2>
+  <div class="row12"><div class="col-content services-grid">
+    <div class="service-card">
+      <div class="service-icon teal">
+        <svg viewBox="0 0 24 24"><path d="M2 12c2-5 6-8 10-8s8 3 10 8c-2 5-6 8-10 8s-8-3-10-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <h3>Customer Service</h3>
+      <p>Assists customers by resolving inquiries and ensuring a positive experience with strong English communication skills.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon orange">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg>
+      </div>
+      <h3>Virtual Assistant</h3>
+      <p>Provides remote administrative support such as scheduling, organization, and task management based on your needs.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon teal">
+        <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="12" rx="1"/><path d="M2 19h20M9 19l1-4h4l1 4"/></svg>
+      </div>
+      <h3>IT Support</h3>
+      <p>Maintains systems, installs updates, troubleshoots issues, and supports internal technical operations.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon orange">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </div>
+      <h3>Lead Generation Specialist</h3>
+      <p>Finds and qualifies potential customers to support sales and business growth.</p>
+    </div>
+  </div>
+  </div>
+  <div class="services-cta">
+    <a href="#" class="btn btn-teal-outline">Learn More &gt;</a>
+  </div>
+</section>
+
+<section class="culture">
+  <div class="row12"><div class="col-content culture-grid">
+    <div class="culture-text">
+      <div class="eyebrow">OUR CULTURE</div>
+      <h2>Where Great <span class="teal">People Thrive</span></h2>
+      <p class="lead">At Circle, our people are our greatest asset. We invest in continuous learning, career growth, and a workplace culture that celebrates diversity, collaboration, and innovation.</p>
+      <a href="#" class="btn btn-teal">See Open Roles</a>
+    </div>
+    <div class="culture-img" style="display:flex; gap:16px;">
+      <img src="WEBSITE PICS/Talking girl.png" alt="culture" style="flex:1;">
+      <img src="WEBSITE PICS/Meeting.png" alt="culture" style="flex:1;">
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="testimonials">
+  <div class="eyebrow center">CLIENT STORIES</div>
+  <h2 class="center">What Our <span class="teal">Client Says</span></h2>
+  <div class="row12"><div class="col-content testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="quote">"Circle Outsourcing truly delivered top-tier talent for our company. Their personalized approach ensured a perfect cultural fit for our team. Excellence in staffing services!"</div>
+      <div class="testi-divider"></div>
+      <div class="testi-person">
+        <div class="avatar">A</div>
+        <div>
+          <div class="name">Andrew Smith</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="quote">"I am grateful for Circle Outsourcing's dedication to finding me the ideal position."</div>
+      <div class="testi-divider"></div>
+      <div class="testi-person">
+        <div class="avatar">R</div>
+        <div>
+          <div class="name">Ray Shaw</div>
+          <div class="role">Operations Head</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="quote">"Circle Outsourcing exceeded my expectations in finding the perfect job match for our company. It saved us time and minimized our cost. They also provide highly-skilled professionals."</div>
+      <div class="testi-divider"></div>
+      <div class="testi-person">
+        <div class="avatar">D</div>
+        <div>
+          <div class="name">Diana Gutierez</div>
+          <div class="role">Recruitment Director</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<div class="cta-wrap">
+  <div class="row12"><div class="col-content">
+  <div class="cta">
+    <img class="deco" src="https://placehold.co/330x283" alt="">
+    <div class="ring"></div>
+    <h2>READY TO WORK WITH US?</h2>
+    <p>Let's discuss how Circle can help transform your business operations.</p>
+    <a href="#" class="btn btn-white">Contact Us</a>
+  </div>
+  </div></div>
+</div>
+
+<footer>
+  <div class="row12"><div class="col-content footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">
+        <img src="COS LOGO.png" alt="logo">
+        <div>
+          <div class="name">Circle Outsourcing</div>
+          <div class="sub">Solutions</div>
+        </div>
+      </div>
+      <p>Circle Outsourcing Solutions Inc. is a leading BPO provider delivering world-class business process outsourcing services that help companies grow and scale.</p>
+      <div class="socials">
+        <div class="social"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
+        <div class="social"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">How It Works</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <div class="contact-row"><div class="icon-circle"></div>Macapagal Village, G/F Unit 6, Clark Center, 09 Jose Abad Santos Ave, Mabalacat, 2023 Pampanga</div>
+      <div class="contact-row"><div class="icon-circle"></div>+63 945 821 3438<br>+63 917 500 6441</div>
+      <div class="contact-row"><div class="icon-circle"></div>arlene.bernardo@circle-outsourcing.com<br>brem.vera@circle-outsourcing.com</div>
+    </div>
+  </div>
+  </div>
+  <div class="row12"><div class="col-content footer-bottom">© 2026 Circle Outsourcing Solutions Inc. All rights reserved.</div></div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  function updateHeader(){
+    if (window.scrollY > 40) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', updateHeader);
+  updateHeader();
+</script>
+
+</body>
+</html>
