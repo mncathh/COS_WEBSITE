@@ -1,0 +1,1348 @@
+/* =========================================================
+   RESET
+   Removes default browser spacing and sets base box model
+========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base body styles: font, text color, background */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #2D2D2D;
+    background: #FAFAFA;
+    line-height: 1.6;
+}
+
+/* Make images responsive by default */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Main content wrapper: centers content and sets max width */
+.row12 {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 78.4px;
+}
+
+.col-content {
+    width: 100%;
+}
+
+/* Links inherit color and have no underline by default */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================================================
+   ROOT VARIABLES
+   Central place for colors, shadows, and spacing values
+========================================================= */
+:root {
+    --teal: #15A4A7;
+    --teal-dark: #005E60;
+    --teal-light: #E6F7F8;
+    --orange: #EF5713;
+    --orange-light: #FA7D46;
+    --orange-pale: #FDE8DF;
+    --navy: #0F1923;
+    --grey-bg: #F5F7FA;
+    --text-dark: #2D2D2D;
+    --text-muted: #6B7A8F;
+    --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.12);
+    --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.10);
+    --shadow-card-hover: 0 16px 48px rgba(0, 0, 0, 0.16);
+    --section-spacing: 120px;
+}
+
+/* =========================================================
+   BUTTONS
+   Shared button styles + color variants (orange, teal, white, outline)
+========================================================= */
+.btn {
+    display: inline-block;
+    border-radius: 60px;
+    padding: 14px 34px;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+/* Subtle hover shine effect that sweeps across the button */
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+}
+.btn:hover::after {
+    transform: translateX(0);
+}
+
+/* Orange solid button (primary CTA) */
+.btn-orange {
+    background: var(--orange);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(239, 87, 19, 0.35);
+}
+.btn-orange:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(239, 87, 19, 0.45);
+}
+
+/* Outlined button used on dark/hero backgrounds */
+.btn-outline {
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+}
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Teal outlined button (secondary CTA) */
+.btn-teal-outline {
+    border: 2px solid var(--teal);
+    color: var(--teal);
+    background: transparent;
+}
+.btn-teal-outline:hover {
+    background: var(--teal);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(21, 164, 167, 0.3);
+}
+
+/* Teal solid button */
+.btn-teal {
+    background: var(--teal);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(21, 164, 167, 0.35);
+}
+.btn-teal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(21, 164, 167, 0.45);
+}
+
+/* White button used on colored (orange) backgrounds */
+.btn-white {
+    background: #fff;
+    color: var(--orange);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+.btn-white:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================================
+   HEADER / NAVIGATION
+   Fixed header that becomes solid/dark once the page is scrolled
+========================================================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: transparent;
+    transition: all 0.4s ease;
+    padding-top: 12px;
+}
+/* Style applied via JS when user scrolls down */
+header.scrolled {
+    background: rgba(15, 25, 35, 0.96);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    padding: 4px 0;
+    padding-top: 8px;
+}
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+/* Logo + brand name/tagline */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.brand img {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+}
+.brand-text {
+    color: #fff;
+}
+.brand-text .name {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+}
+.brand-text .sub {
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.85;
+}
+
+/* Navigation menu links */
+nav.links {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+nav.links a {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.25s ease;
+    position: relative;
+}
+nav.links a:hover {
+    color: var(--orange-light);
+}
+/* Highlights the current page in the nav (e.g. "About") */
+nav.links a.active {
+    color: var(--orange-light);
+}
+
+/* =========================================================
+   HERO SECTION
+   Shorter banner than the homepage, left-aligned text with eyebrow label
+========================================================= */
+.hero {
+    position: relative;
+    background: var(--navy);
+    overflow: hidden;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+}
+/* Teal glow overlay on top of the hero background image */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(21, 164, 167, 0.2) 0%, transparent 70%);
+    z-index: 1;
+}
+/* The actual hero background image */
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+    z-index: 0;
+}
+.hero .row12 {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 60px 0 40px;
+}
+.hero-content .eyebrow {
+    color: var(--orange-light);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+.hero-content h1 {
+    color: #fff;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    max-width: 850px;
+    animation: fadeUp 0.9s ease;
+    letter-spacing: -1.5px;
+}
+
+/* =========================================================
+   GENERIC SECTION / HEADING STYLES
+   Reused across "Story", "Mission/Vision", "Talent", "Milestones"
+========================================================= */
+section {
+    padding: var(--section-spacing) 0;
+}
+.eyebrow {
+    color: var(--orange);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+h2 {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+h2 .teal {
+    color: var(--teal);
+}
+h2 .orange {
+    color: var(--orange);
+}
+.center {
+    text-align: center;
+}
+
+/* =========================================================
+   STORY SECTION ("How It Began")
+   Image on the left with a floating badge, text on the right
+========================================================= */
+.story-section {
+    background: #fff;
+}
+.story-container {
+    display: flex;
+    gap: 72px;
+    align-items: stretch;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.story-image {
+    flex: 1 1 420px;
+    min-width: 280px;
+    position: relative;
+    order: 1;
+    display: flex;
+    align-items: stretch;
+}
+.story-image img {
+    border-radius: 24px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: var(--shadow-lg);
+}
+
+/* Floating orange badge sitting outside the image's bottom-left corner */
+.image-legend-badge {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: var(--orange);
+    padding: 16px 22px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(239, 87, 19, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 90px;
+    z-index: 2;
+}
+.image-legend-badge .legend-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+}
+.image-legend-badge .legend-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    margin-top: 2px;
+}
+.image-legend-badge .legend-text {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    margin-top: 2px;
+}
+
+.story-content {
+    flex: 1 1 580px;
+    min-width: 280px;
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.story-content .eyebrow {
+    color: var(--orange);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+.story-content h2 {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+}
+.story-content h2 .teal {
+    color: var(--teal);
+}
+.story-content p {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+/* =========================================================
+   MISSION & VISION SECTION
+   Two centered cards side by side
+========================================================= */
+.mv-section {
+    background: var(--grey-bg);
+}
+.mv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 52px;
+}
+.mv-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 48px 40px;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    border: 2px solid transparent;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+}
+.mv-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-4px);
+}
+.mv-card.teal-border {
+    border-color: var(--teal);
+}
+.mv-card.orange-border {
+    border-color: var(--orange-light);
+}
+.mv-card h3 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+.mv-card h3.teal {
+    color: var(--teal-dark);
+}
+.mv-card h3.orange {
+    color: var(--orange);
+}
+.mv-card p {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+/* =========================================================
+   PHOTO CAROUSEL
+   Full-width, auto-scrolling row of office photos (infinite loop)
+========================================================= */
+.carousel-section {
+    background: #fff;
+    padding: 60px 0 80px;
+    overflow: hidden;
+    width: 100%;
+}
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+/* Track holds two duplicated sets of slides so the loop looks seamless */
+.carousel-track {
+    display: flex;
+    gap: 32px;
+    width: max-content;
+    animation: scrollCarousel 60s linear infinite;
+}
+.carousel-slide {
+    flex: 0 0 500px;
+    height: 450px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+}
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Moves the track exactly half its width — since content is duplicated,
+   this creates a smooth, seamless infinite-scroll illusion */
+@keyframes scrollCarousel {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* =========================================================
+   VALUE PROPOSITION SLIDER
+   Horizontally scrollable card slider, controlled by prev/next buttons
+========================================================= */
+.value-section {
+    background: var(--grey-bg);
+    overflow: hidden;
+}
+.value-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.value-header .eyebrow {
+    margin-bottom: 10px;
+}
+.value-header h2 {
+    margin-bottom: 0;
+}
+.value-slider-wrapper {
+    position: relative;
+    margin-top: 44px;
+    width: 100%;
+    padding-left: max(78.4px, calc((100vw - 1440px) / 2 + 78.4px));
+    padding-right: 0;
+}
+.value-slider-container {
+    overflow: hidden;
+}
+/* The track that gets translated left/right via JS when arrows are clicked */
+.value-slider-track {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+.value-slide {
+    flex: 0 0 320px;
+    min-width: 0;
+}
+.value-card {
+    border-radius: 20px;
+    padding: 38px 32px 34px;
+    text-align: left;
+    border: 1px solid rgba(0, 0, 0, 0.027);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 360px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* Alternates card background color: pale orange for odd, teal for even */
+.value-slide:nth-child(odd) .value-card {
+    background: var(--orange-pale);
+}
+.value-slide:nth-child(even) .value-card {
+    background: var(--teal-light);
+}
+
+.card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: transparent;
+    box-shadow: none;
+}
+.card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.value-card h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    color: var(--text-dark);
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+}
+.value-card p {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.65;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Prev/Next circular arrow buttons for the value slider */
+.slider-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+.slider-arrow {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid #d8dce1;
+    background: #fff;
+    color: #2D2D2D;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.slider-arrow:hover {
+    background: var(--teal);
+    color: #fff;
+    border-color: var(--teal);
+}
+/* Disabled state when the slider reaches either end */
+.slider-arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+.slider-arrow:disabled:hover {
+    background: #fff;
+    color: #2D2D2D;
+    border-color: #d8dce1;
+}
+
+/* =========================================================
+   TALENT ACQUISITION SECTION ("Our Approach")
+   Text on the left, "Where We Source Talent" panel on the right
+========================================================= */
+.talent-section {
+    background: #fff;
+}
+.talent-grid {
+    display: flex;
+    gap: 72px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.talent-text {
+    flex: 1 1 580px;
+    min-width: 280px;
+}
+.talent-text h2 {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+}
+.talent-text p {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+.talent-sources {
+    background: var(--teal-light);
+    border-radius: 24px;
+    padding: 40px 36px;
+    flex: 1 1 420px;
+    min-width: 280px;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.talent-sources:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-4px);
+}
+.talent-sources h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--teal-dark);
+    margin-bottom: 24px;
+}
+/* Each row: icon + label, e.g. "Professional Network" */
+.source-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.source-item:last-child {
+    border-bottom: none;
+}
+.source-icon {
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.source-icon svg {
+    width: 20px;
+    height: 20px;
+}
+.source-item span {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-dark);
+}
+/* Small pill tags at the bottom of the sources panel */
+.source-tags {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.source-tag {
+    background: #fff;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================================
+   MILESTONES SECTION
+   Vertical timeline alternating left/right with year + description
+========================================================= */
+.milestone-section {
+    background: var(--grey-bg);
+}
+.milestone-header {
+    text-align: center;
+    margin-bottom: 52px;
+}
+.milestone-header .eyebrow {
+    text-align: center;
+}
+.milestone-header h2 {
+    text-align: center;
+}
+
+/* Vertical line running down the center of the timeline */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0 20px 0;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    bottom: 0;
+    width: 3px;
+    background: var(--teal-dark);
+    transform: translateX(-50%);
+    border-radius: 4px;
+}
+
+/* Each milestone entry takes up half the width, alternating sides */
+.timeline-item {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 0 50px 0;
+    position: relative;
+    width: 50%;
+}
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+.timeline-item:nth-child(odd) {
+    padding-right: 50px;
+    text-align: right;
+    justify-content: flex-end;
+}
+.timeline-item:nth-child(even) {
+    padding-left: 50px;
+    text-align: left;
+    justify-content: flex-start;
+    margin-left: 50%;
+}
+
+/* Orange dot marking each point on the timeline */
+.timeline-item .dot {
+    position: absolute;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    background: var(--orange);
+    border-radius: 50%;
+    border: 3px solid var(--orange);
+    box-shadow: 0 0 0 4px rgba(239, 87, 19, 0.15);
+    z-index: 2;
+}
+.timeline-item:nth-child(odd) .dot {
+    right: -8px;
+}
+.timeline-item:nth-child(even) .dot {
+    left: -8px;
+}
+
+.timeline-item .year {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 4px;
+}
+.timeline-item p {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 380px;
+}
+.timeline-item:nth-child(odd) p {
+    margin-left: auto;
+}
+
+/* =========================================================
+   CALL TO ACTION (CTA) BANNER
+   Overlaps the footer slightly using negative margin
+========================================================= */
+.cta-wrap {
+    padding: 40px 24px 0;
+    position: relative;
+    z-index: 2;
+    margin-bottom: -140px;
+}
+.cta {
+    background: linear-gradient(135deg, var(--orange-light), var(--orange));
+    border-radius: 28px;
+    padding: 72px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(239, 87, 19, 0.25);
+}
+/* Decorative concentric rings in the bottom-right corner */
+.cta .ring {
+    position: absolute;
+    right: -60px;
+    bottom: -80px;
+    width: 320px;
+    height: 320px;
+    border: 20px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+.cta .ring::before {
+    content: '';
+    position: absolute;
+    inset: 40px;
+    border: 20px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+}
+.cta .ring::after {
+    content: '';
+    position: absolute;
+    inset: 80px;
+    border: 20px solid rgba(255, 255, 255, 0.06);
+    border-radius: 50%;
+}
+.cta h2 {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 700;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.5px;
+}
+.cta p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Afacad Flux', sans-serif;
+    margin: 20px auto 36px;
+    max-width: 640px;
+    position: relative;
+    z-index: 1;
+}
+.cta .btn {
+    position: relative;
+    z-index: 1;
+}
+
+/* =========================================================
+   FOOTER
+   Dark navy footer with brand info, links, and contact details
+========================================================= */
+footer {
+    background: var(--navy);
+    color: #fff;
+    padding: 200px 24px 40px; /* extra top padding leaves room for the overlapping CTA */
+    position: relative;
+    z-index: 1;
+}
+.footer-grid {
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+}
+.footer-col {
+    flex: 1 1 240px;
+    min-width: 200px;
+}
+.footer-brand {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.footer-brand img {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+}
+.footer-brand .name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+.footer-brand .sub {
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.7;
+}
+.footer-col p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    opacity: 0.75;
+    max-width: 300px;
+}
+.footer-col h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: -0.3px;
+}
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.footer-links a {
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0.7;
+    transition: all 0.25s ease;
+}
+.footer-links a:hover {
+    opacity: 1;
+    color: var(--orange-light);
+    transform: translateX(4px);
+}
+/* Contact rows: icon + address/phone/email text */
+.contact-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0.75;
+    align-items: flex-start;
+}
+.contact-icon {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contact-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: rgba(255, 255, 255, 0.6);
+    fill: none;
+    stroke-width: 1.8;
+}
+/* Circular social media icon buttons */
+.socials {
+    display: flex;
+    gap: 14px;
+    margin-top: 24px;
+}
+.social {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.social:hover {
+    background: var(--orange);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(239, 87, 19, 0.3);
+}
+.social svg {
+    width: 18px;
+    height: 18px;
+    stroke: #fff;
+    fill: none;
+    stroke-width: 1.5;
+}
+.social svg .linkedin-fill {
+  fill: #fff;
+}
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: 48px;
+    padding-top: 28px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.5;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Elements with this class fade+slide in; JS toggles play state via IntersectionObserver */
+.fade-up {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.fade-up:nth-child(2) {
+    animation-delay: 0.1s;
+}
+.fade-up:nth-child(3) {
+    animation-delay: 0.2s;
+}
+.fade-up:nth-child(4) {
+    animation-delay: 0.3s;
+}
+.fade-up:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+========================================================= */
+@media (max-width: 1024px) {
+    .value-slide {
+        flex: 0 0 280px;
+    }
+    .carousel-slide {
+        flex: 0 0 320px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 900px) {
+    :root {
+        --section-spacing: 80px;
+    }
+    .nav {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px 0;
+    }
+    nav.links {
+        justify-content: center;
+        gap: 20px;
+    }
+    .row12 {
+        padding: 0 24px;
+    }
+    .story-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .story-image {
+        order: 1;
+        width: 100%;
+        min-height: 320px;
+    }
+    .story-image img {
+        height: 100%;
+        min-height: 320px;
+    }
+    .story-content {
+        order: 2;
+    }
+    .talent-grid {
+        flex-direction: column;
+    }
+    .mv-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero-content h1 {
+        font-size: 44px;
+    }
+    .cta h2 {
+        font-size: 32px;
+    }
+    .cta {
+        padding: 48px 28px;
+    }
+    .image-legend-badge {
+        bottom: -16px;
+        left: -12px;
+        padding: 12px 18px;
+        min-width: 75px;
+    }
+    .image-legend-badge .legend-number {
+        font-size: 26px;
+    }
+    .carousel-slide {
+        flex: 0 0 280px;
+        height: 210px;
+    }
+    .carousel-track {
+        gap: 24px;
+    }
+    .value-slide {
+        flex: 0 0 82%;
+    }
+    .value-header {
+        align-items: flex-start;
+    }
+    .value-slider-wrapper {
+        padding-left: max(24px, calc((100vw - 1440px) / 2 + 24px));
+    }
+    .value-card {
+        min-height: 300px;
+    }
+    .value-card p {
+        font-size: 16px;
+    }
+    .talent-sources {
+        padding: 30px 24px;
+    }
+
+    .timeline::before {
+        left: 20px;
+        transform: none;
+        top: 0;
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 0;
+        padding-bottom: 40px;
+        text-align: left;
+        justify-content: flex-start;
+        margin-left: 0;
+    }
+    .timeline-item:nth-child(odd) {
+        padding-right: 0;
+        text-align: left;
+        justify-content: flex-start;
+    }
+    .timeline-item:nth-child(even) {
+        padding-left: 50px;
+        margin-left: 0;
+    }
+    .timeline-item .dot {
+        left: -8px !important;
+        right: auto !important;
+    }
+    .timeline-item:nth-child(odd) .dot {
+        left: -8px;
+        right: auto;
+    }
+    .timeline-item p {
+        max-width: 100%;
+    }
+    .timeline-item:nth-child(odd) p {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --section-spacing: 60px;
+    }
+    .hero-content h1 {
+        font-size: 30px;
+    }
+    .story-content h2 {
+        font-size: 30px;
+    }
+    .mv-card {
+        padding: 32px 24px;
+        min-height: 220px;
+    }
+    .mv-card h3 {
+        font-size: 24px;
+    }
+    .footer-grid {
+        gap: 36px;
+    }
+    .talent-sources {
+        padding: 28px 20px;
+    }
+    .story-image {
+        min-height: 250px;
+    }
+    .story-image img {
+        min-height: 250px;
+    }
+    .image-legend-badge {
+        bottom: -12px;
+        left: -10px;
+        padding: 10px 14px;
+        min-width: 65px;
+        border-radius: 12px;
+    }
+    .image-legend-badge .legend-number {
+        font-size: 22px;
+    }
+    .image-legend-badge .legend-text {
+        font-size: 8px;
+    }
+    .image-legend-badge .legend-label {
+        font-size: 8px;
+    }
+    .carousel-slide {
+        flex: 0 0 220px;
+        height: 170px;
+    }
+    .carousel-track {
+        gap: 16px;
+    }
+    .carousel-section {
+        padding: 40px 0 60px;
+    }
+    .value-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .value-card {
+        padding: 26px 22px;
+        min-height: 260px;
+    }
+    .value-card h4 {
+        font-size: 18px;
+    }
+    .value-card p {
+        font-size: 15px;
+    }
+    .slider-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+    .value-slide {
+        flex: 0 0 100%;
+    }
+    .card-icon {
+        width: 48px;
+        height: 48px;
+    }
+    .timeline-item .year {
+        font-size: 26px;
+    }
+    .timeline-item p {
+        font-size: 16px;
+    }
+    .timeline-item {
+        padding-left: 40px;
+        padding-bottom: 32px;
+    }
+    .timeline-item:nth-child(even) {
+        padding-left: 40px;
+    }
+    .timeline::before {
+        left: 16px;
+        top: 0;
+    }
+    .timeline-item .dot {
+        left: -6px !important;
+        width: 14px;
+        height: 14px;
+    }
+    .milestone-header {
+        margin-bottom: 36px;
+    }
+}
